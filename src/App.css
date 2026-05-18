@@ -1,0 +1,152 @@
+/* ── Toss Brand Color System ──────────────────────────
+   Primary:  #3182F6  (Toss Blue)
+   Dark:     #1B64DA
+   BG:       #0D1B2E → #0A1628  (deep navy, Toss dark style)
+   Surface:  rgba(255,255,255,0.07)
+   Text:     #FFFFFF / rgba(255,255,255,0.55)
+─────────────────────────────────────────────────── */
+
+/* ── Ambient orbs ── */
+.app-container::before,
+.app-container::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+.app-container::before {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(49, 130, 246, 0.22), transparent 70%);
+  top: -120px;
+  right: -100px;
+  animation: float1 9s ease-in-out infinite;
+}
+.app-container::after {
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(27, 100, 218, 0.18), transparent 70%);
+  bottom: -80px;
+  left: -80px;
+  animation: float2 11s ease-in-out infinite;
+}
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(-28px, 28px); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(28px, -28px); }
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(160deg, #0D1B2E 0%, #0A1628 60%, #0D2040 100%);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Onboarding ── */
+.onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.onboarding-content {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  padding: 40px 32px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+  animation: onboardIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes onboardIn {
+  from { opacity: 0; transform: scale(0.87) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.onboarding-content h1 {
+  font-size: 34px;
+  margin-bottom: 12px;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+.onboarding-content p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 28px;
+  line-height: 1.65;
+}
+.onboarding-content ol {
+  text-align: left;
+  margin-bottom: 36px;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: step-counter;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.onboarding-content li {
+  counter-increment: step-counter;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: rgba(255,255,255,0.78);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.onboarding-content li::before {
+  content: counter(step-counter);
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  background: linear-gradient(135deg, #1B64DA, #3182F6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+}
+.onboarding-content button {
+  background: linear-gradient(135deg, #1B64DA 0%, #3182F6 100%);
+  color: white;
+  border: none;
+  padding: 0 40px;
+  height: 52px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.2px;
+  box-shadow: 0 8px 24px rgba(49, 130, 246, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+.onboarding-content button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(49, 130, 246, 0.55);
+}
+
+@media (max-width: 512px) {
+  .onboarding-content { padding: 28px 20px; }
+  .onboarding-content h1 { font-size: 28px; }
+}

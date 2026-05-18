@@ -1,0 +1,118 @@
+.playing-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 32px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.playing-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.5px;
+  text-align: center;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.75; }
+  50%       { opacity: 1; }
+}
+
+/* ── Card: Toss-blue gradient ── */
+.card-display { display: flex; justify-content: center; align-items: center; }
+
+.card {
+  width: 280px;
+  height: 190px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  /* Toss blue gradient with warm accent */
+  background: linear-gradient(135deg, #1B64DA 0%, #3182F6 55%, #60A5FA 100%);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.15) inset,
+    0 20px 56px rgba(49,130,246,0.55),
+    0 8px 20px rgba(0,0,0,0.28);
+  animation: cardFlip 0.2s ease-out;
+  will-change: transform, opacity;
+}
+
+/* Shimmer */
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 38%;
+  height: 200%;
+  background: rgba(255,255,255,0.18);
+  transform: skewX(-20deg);
+  animation: shimmer 0.2s linear;
+}
+@keyframes shimmer {
+  from { left: -60%; }
+  to   { left: 140%; }
+}
+
+@keyframes cardFlip {
+  0%   { transform: scale(0.82) rotateY(90deg); opacity: 0.2; }
+  65%  { transform: scale(1.04) rotateY(-5deg); opacity: 1; }
+  100% { transform: scale(1) rotateY(0deg); opacity: 1; }
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 0 16px;
+  z-index: 1;
+}
+.card-number {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.55;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.card-name {
+  font-size: 34px;
+  font-weight: 800;
+  word-break: break-word;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.25);
+}
+
+/* ── Dots ── */
+.animation-indicator { display: flex; gap: 8px; align-items: center; }
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: background 0.15s, transform 0.15s;
+}
+.dot.filled {
+  background: #3182F6;
+  transform: scale(1.5);
+  box-shadow: 0 0 8px rgba(49,130,246,0.7);
+}
+
+@media (max-width: 512px) {
+  .card { width: 240px; height: 168px; }
+  .card-name { font-size: 28px; }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .playing-screen { flex-direction: row; padding: 16px 40px; gap: 40px; }
+  .card { width: 200px; height: 136px; }
+  .card-name { font-size: 22px; }
+}

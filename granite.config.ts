@@ -1,7 +1,7 @@
 import { defineConfig } from "@apps-in-toss/web-framework/config";
 
 export default defineConfig({
-  appName: "random-rice",
+  appName: "randomdice",
   brand: {
     displayName: "랜덤 복불복 - 밥값 내기",
     primaryColor: "#3182F6",
